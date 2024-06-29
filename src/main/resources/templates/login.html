@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <% response.sendRedirect("/");>
+</div>
+<div>
+    <form method="post" action="/login">
+        <h2>Login</h2>
+        <div>
+            <input name="username" type="text">
+            <input name="password" type="password">
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

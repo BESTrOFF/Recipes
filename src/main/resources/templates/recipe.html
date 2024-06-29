@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${recipe.name}">Recipe</title>
+</head>
+<body>
+<h1 th:text="${recipe.name}"/> <br/>
+<h2 th:text="${recipe.getAuthor()}"/>
+<div th:text="${recipe.getIngredientsAsString()}"/>
+<pre th:text="${recipe.recipeDescription}"></pre>
+</body>
+</html>

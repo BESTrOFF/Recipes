@@ -1,0 +1,79 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Create Recipe</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--This is recipe form-->
+
+<!--<h1>Create Recipe</h1>-->
+
+<!--<form action="#" th:action="@{/saveRecipe}" th:object="${dto}" method="post">-->
+<!--    <label for="name">Recipe Name:</label>-->
+<!--    <input type="text" id="name" th:field="*{name}"/><br/><br/>-->
+
+<!--    <textarea name="recipeDescription" th:field="*{recipeDescription}"></textarea><br><br>-->
+
+<!--    <div id="ingredientsDiv">-->
+<!--        <label for="ingredient1Name">Ingredient 1 Name:</label>-->
+<!--        <input type="text" id="ingredient1Name" th:field="*{ingredients[0].name}"/><br/><br/>-->
+
+<!--        <label for="ingredient1Quantity">Ingredient 1 Quantity:</label>-->
+<!--        <input type="number" id="ingredient1Quantity" th:field="*{ingredients[0].quantity}"/><br/><br/>-->
+
+<!--        <label for="ingredient1Unit">Ingredient 1 Unit:</label>-->
+<!--        <select id="ingredient1Unit" th:field="*{ingredients[0].unit}">-->
+<!--            <option th:each="status : ${T(com.bystrov.recipes5.entity.recipe.UnitOfMeasurement).values()}"-->
+<!--                    th:value="${status}" th:text="${status}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
+
+
+<!--    <button type="submit">Save Recipe</button>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Recipe</title>
+</head>
+<body>
+<h1>Create Recipe</h1>
+<form action="/saveRecipe" method="post">
+    <label for="name">Recipe Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="recipeDescription">Recipe Description:</label><br>
+    <textarea id="recipeDescription" name="recipeDescription" rows="4" cols="50"></textarea><br><br>
+
+    <h2>Ingredients:</h2>
+    <div th:each="ingredient, stat : ${ingredients}">
+        <label th:text="${'Ingredient ' + (stat.index + 1) + ':'}"></label><br>
+        <input type="text" th:field="*{ingredients[__${stat.index}__].name}"><br>
+
+        <input type="number" step="0.01" th:field="*{ingredients[__${stat.index}__].quantity}"><br>
+
+        <select th:field="*{ingredients[__${stat.index}__].unit}">
+            <option th:each="unit : ${T(com.bystrov.recipes5.entity.recipe.UnitOfMeasurement).values()}" th:value="${unit}" th:text="${unit}"></option>
+        </select><br><br>
+    </div>
+
+
+    <button type="button" onclick="addIngredient()">Add Ingredient</button><br><br>
+
+    <button type="submit">Save Recipe</button>
+</form>
+
+<script>
+    function addIngredient() {
+        // JavaScript function to dynamically add more ingredient fields
+    }
+</script>
+</body>
+</html>

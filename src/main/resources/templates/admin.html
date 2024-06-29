@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1>User List</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Roles</th>
+    </tr>
+    <tr th:each="user : ${allUsers}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td>
+            <ul>
+                <li th:each="role : ${user.roles}" th:text="${role.name}"></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

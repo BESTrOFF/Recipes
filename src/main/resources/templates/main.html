@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Main</title>
+</head>
+
+<body>
+<div sec:authorize="isAnonymous()">
+    <h3><a th:href="@{/login}">Login</a></h3>
+    <h3><a th:href="@{/registration}">Registration</a></h3>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h3><a href="/logout">Logout</a> </h3>
+</div>
+<table>
+    <tbody>
+    <tr th:each="name : ${names}">
+        <a th:href="@{/recipe/{name}(name=${name})}" th:text="${name}"/>
+        <br>
+    </tr>
+</table>
+<h2>
+    <button>
+        <a th:href="@{/search}">Search</a>
+    </button>
+</h2>
+<div sec:authorize="isAuthenticated()">
+    <h2>
+        <button>
+            <a th:href="@{/create}">Create</a>
+        </button>
+    </h2>
+</div>
+
+<div sec:authorize="hasRole('ADMIN')">
+    <button>
+        <a th:href="@{/admin}" th:text="admin"/>
+    </button>
+</div>
+
+<h2>
+    <button th:each="pageNumber : ${pages}">
+        <a th:href="@{/(page=${pageNumber}, limit=${limit})}" th:text="${pageNumber}"/>
+    </button>
+</h2>
+</body>
+</html>
